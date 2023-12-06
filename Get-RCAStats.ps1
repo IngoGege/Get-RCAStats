@@ -4,7 +4,7 @@
 
 Created by: ingo.gegenwarth[at]sap.com
 Version:    42 ("What do you get if you multiply six by nine?")
-Changed:    05.06.2015
+Changed:    06.06.2023
 
 Retrieves statistics from CAS server for specific user from RPC logs. 
 
@@ -173,7 +173,7 @@ Function GetExchServer {
     #http://technet.microsoft.com/en-us/library/bb123496(v=exchg.80).aspx on the bottom there is a list of values
     param([array]$Roles,[string]$ADSite)
     Process {
-        $valid = @("2","4","16","20","32","36","38","54","64","16385","16439")
+        $valid = @("2","4","16","20","32","36","38","54","64","16385","16439","16423")
         ForEach ($Role in $Roles){
             If (!($valid -contains $Role)) {
                 Write-Output -fore red "Please use the following numbers: MBX=2,CAS=4,UM=16,HT=32,Edge=64 multirole servers:CAS/HT=36,CAS/MBX/HT=38,CAS/UM=20,E2k13 MBX=54,E2K13 CAS=16385,E2k13 CAS/MBX=16439"
@@ -210,7 +210,7 @@ Function GetExchServer {
 If (!($Localpath)) {
 # get CAS servers
     If ($Exchange2013) {
-        [array]$servers = GetExchServer -Role 54,16439 -ADSite $ADSite
+        [array]$servers = GetExchServer -Role 54,16439,16423 -ADSite $ADSite
         $LogFolders=$LogFolders2013
     }
     Else {
